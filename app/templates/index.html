@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stair Counter Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="video-stage">
+        <div class="stage-header">
+          <h1>People Flow Monitor</h1>
+          <div class="status-pill" id="status-pill">Connecting...</div>
+        </div>
+        <div class="video-frame-wrap">
+          <img id="live-frame" src="/video-feed" alt="Live stream" />
+        </div>
+      </main>
+
+      <aside class="metrics-panel">
+        <section class="panel-top">
+          <p class="eyebrow">Realtime Analytics</p>
+          <h2 id="source-label">Source</h2>
+          <div class="actions-row">
+            <button class="btn ghost" id="restart-btn" type="button">Restart Stream</button>
+            <button class="btn ghost danger" id="reset-today-btn" type="button">Reset Today</button>
+          </div>
+        </section>
+
+        <section class="grid-metrics">
+          <article class="metric-card highlight">
+            <p>Today total</p>
+            <h3 id="today-total">0</h3>
+          </article>
+          <article class="metric-card">
+            <p>Session total</p>
+            <h3 id="session-total">0</h3>
+          </article>
+          <article class="metric-card">
+            <p>Active tracks</p>
+            <h3 id="active-tracks">0</h3>
+          </article>
+          <article class="metric-card">
+            <p>FPS</p>
+            <h3 id="fps">0.0</h3>
+          </article>
+        </section>
+
+        <section class="split-card">
+          <div class="split-head">
+            <h3>Flow Split</h3>
+            <span id="dominance">Balanced</span>
+          </div>
+          <div class="split-row">
+            <label>Left <span id="left-value">0</span></label>
+            <div class="progress"><span id="left-bar"></span></div>
+          </div>
+          <div class="split-row">
+            <label>Right <span id="right-value">0</span></label>
+            <div class="progress"><span id="right-bar"></span></div>
+          </div>
+        </section>
+
+        <section class="trend-card">
+          <div class="trend-head">
+            <h3>Trend</h3>
+            <div class="range-pills" id="range-pills">
+              <button data-range="60" class="active">1m</button>
+              <button data-range="300">5m</button>
+              <button data-range="900">15m</button>
+            </div>
+          </div>
+          <canvas id="trend-canvas" width="360" height="140"></canvas>
+          <div class="trend-legend">
+            <span><i class="dot left"></i> Left</span>
+            <span><i class="dot right"></i> Right</span>
+            <span><i class="dot total"></i> Total</span>
+          </div>
+        </section>
+
+        <section class="insights-card">
+          <h3>Quick Insights</h3>
+          <ul>
+            <li>Throughput/min: <strong id="throughput">0.0</strong></li>
+            <li>Left ratio: <strong id="left-ratio">0%</strong></li>
+            <li>Right ratio: <strong id="right-ratio">0%</strong></li>
+          </ul>
+        </section>
+
+        <section class="distance-card">
+          <div class="distance-head">
+            <h3>Distance Explorer</h3>
+            <span id="distance-total">Session: 0 m</span>
+          </div>
+          <p id="distance-caption">No distance yet</p>
+          <div class="distance-progress">
+            <span id="distance-progress-bar"></span>
+          </div>
+          <ul id="distance-list"></ul>
+        </section>
+      </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
